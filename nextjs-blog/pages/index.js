@@ -7,14 +7,29 @@ import Layout from '../components/Layout'
 import Head from 'next/head'
 import Link from 'next/link'
 
-export default function Home() {
+import { getSortedPostsData } from '../lib/posts.js'
+
+
+// Retrieving Data
+export async function getStaticProps() {
+  const allPostsData = getSortedPostsData()
+  return {
+    props: {
+      allPostsData
+    }
+  }
+}
+
+
+// Main
+export default function Home({ allPostsData }) {
   return (
     <div className="container">
       <Head>
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Layout>
+      <Layout home>
       <main>
         <h1 className="title">
           Read{' '}
@@ -22,6 +37,21 @@ export default function Home() {
             <a>This page!</a>
           </Link>
         </h1>
+
+        <section className="headingMd padding1px">
+          <h2 className="headingLg">Blog</h2>
+          <ul className="list">
+            {allPostsData.map( ({id, date, title}) => (
+              <li className="listItem" key={id}>
+                {title}
+                <br/>
+                {id}
+                <br/>
+                {date}
+              </li>
+            ))}
+          </ul>
+        </section>
 
         <p className="description">
           Get started by editing <code>pages/index.js</code>
