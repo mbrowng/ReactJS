@@ -41,15 +41,7 @@ export default function Home({ allPostsData }) {
         <section className="headingMd padding1px">
           <h2 className="headingLg">Blog</h2>
           <ul className="list">
-            {allPostsData.map( ({id, date, title}) => (
-              <li className="listItem" key={id}>
-                {title}
-                <br/>
-                {id}
-                <br/>
-                {date}
-              </li>
-            ))}
+            
           </ul>
         </section>
 
